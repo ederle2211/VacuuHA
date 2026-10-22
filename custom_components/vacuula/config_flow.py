@@ -6,7 +6,7 @@ import voluptuous as vol
 from typing import Any
 
 from homeassistant import config_entries
-from homeassistant.data_entry_flow import ConfigFlowResult
+from homeassistant.config_entries import ConfigFlowResult
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
 
