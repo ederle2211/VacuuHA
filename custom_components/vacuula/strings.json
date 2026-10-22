@@ -8,8 +8,8 @@
         }
       },
       "zeroconf_confirm": {
-        "title": "Vacuula-Server gefunden",
-        "description": "Vacuula unter {host}:{port} hinzufügen?"
+        "title": "Vacuula ({robot_count} Roboter)",
+        "description": "Vacuula unter {host}:{port}. Roboter: {robot_count}. Hinzufügen?"
       }
     },
     "error": {
@@ -17,7 +17,8 @@
     },
     "abort": {
       "already_configured": "Dieser Vacuula-Server ist bereits eingerichtet.",
-      "invalid_discovery_info": "Die mDNS-Ankündigung enthält keinen gültigen Port."
+      "invalid_discovery_info": "Die mDNS-Ankündigung enthält keinen gültigen Port.",
+      "cannot_connect": "Verbindung zum Vacuula-Server fehlgeschlagen."
     }
   }
 }
