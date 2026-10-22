@@ -120,18 +120,7 @@ class VacuulaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             "robot_count": str(self._discovered_robot_count),
         }
 
-        # CHANGED: Confirm-only hier setzen, nicht im Confirm-Step.
-        self._set_confirm_only()
-
-        return self.async_show_form(
-            step_id="zeroconf_confirm",
-            data_schema=vol.Schema({}),
-            description_placeholders={
-                "host": host,
-                "port": str(port),
-                "robot_count": str(self._discovered_robot_count),
-            },
-        )
+        return await self.async_step_zeroconf_confirm()
 
     async def async_step_zeroconf_confirm(
         self, user_input: dict[str, Any] | None = None
@@ -144,7 +133,9 @@ class VacuulaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_abort(reason="invalid_discovery_info")
 
         if user_input is None:
+            self._set_confirm_only()
             return self._show_zeroconf_confirm_form(host, port)
+            
         robots = await self._async_get_robots(host, port)
         if robots is None:
             return self._show_zeroconf_confirm_form(
