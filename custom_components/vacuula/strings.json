@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+            "host": "Host",
+            "port": "Port"
+        }
+      },
+      "zeroconf_confirm": {
+        "title": "Vacuula-Server gefunden",
+        "description": "Vacuula unter {host}:{port} hinzufügen?"
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zum Vacuula-Server fehlgeschlagen."
+    },
+    "abort": {
+      "already_configured": "Dieser Vacuula-Server ist bereits eingerichtet.",
+      "invalid_discovery_info": "Die mDNS-Ankündigung enthält keinen gültigen Port."
+    }
+  }
+}

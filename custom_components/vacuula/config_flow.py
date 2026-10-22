@@ -83,16 +83,55 @@ class VacuulaConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         host = discovery_info.host
         port = discovery_info.port
 
+        if port is None:
+            return self.async_abort(reason="invalid_discovery_info")
+
         await self.async_set_unique_id(f"{host.lower()}:{port}")
         self._abort_if_unique_id_configured()
 
-        if not await self._check_server(host, port):
-            return self.async_abort(reason="cannot_connect")
+        self._discovered_host = host
+        self._discovered_port = port
 
-        return self.async_create_entry(
-            title=f"Vacuula ({host}:{port})",
-            data={
-                CONF_HOST: host,
-                CONF_PORT: port,
+        return self.async_show_form(
+            data_schema=vol.Schema({}),
+            step_id="zeroconf_confirm",
+            description_placeholders={
+                "host": host,
+                "port": str(port),
+            },
+        )
+
+    async def async_step_zeroconf_confirm(
+        self, user_input: dict | None = None
+    ) -> FlowResult:
+        host = self._discovered_host
+        port = self._discovered_port
+
+        if user_input is not None:
+            if not await self._check_server(host, port):
+                return self.async_show_form(
+                    data_schema=vol.Schema({}),
+                    step_id="zeroconf_confirm",
+                    errors={"base": "cannot_connect"},
+                    description_placeholders={
+                        "host": host,
+                        "port": str(port),
+                    },
+                )
+
+            return self.async_create_entry(
+                title=f"Vacuula ({host}:{port})",
+                data={
+                    CONF_HOST: host,
+                    CONF_PORT: port,
+                },
+            )
+
+        return self.async_show_form(
+            data_schema=vol.Schema({}),
+            step_id="zeroconf_confirm",
+            description_placeholders={
+                "host": host,
+                "port": str(port),
             },
         )
