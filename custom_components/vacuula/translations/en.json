@@ -1,6 +1,6 @@
 {
   "config": {
-    "flow_title": "VacuuHA ({robot_count} Roboter)",
+    "flow_title": "VacuuHA ({robot_count} robots)",
     "step": {
       "user": {
         "data": {
@@ -9,17 +9,17 @@
         }
       },
       "zeroconf_confirm": {
-        "title": "Vacuula-Server gefunden",
-        "description": "Vacuula unter {host}:{port}. Roboter: {robot_count}. Hinzufügen?"
+        "title": "Vacuula-Server found",
+        "description": "Vacuula at {host}:{port}. Robots: {robot_count}. Add?"
       }
     },
     "error": {
-      "cannot_connect": "Verbindung zum Vacuula-Server fehlgeschlagen."
+      "cannot_connect": "Connection to Vacuula-Server failed."
     },
     "abort": {
-      "already_configured": "Dieser Vacuula-Server ist bereits eingerichtet.",
-      "invalid_discovery_info": "Die mDNS-Ankündigung enthält keinen gültigen Port.",
-      "cannot_connect": "Verbindung zum Vacuula-Server fehlgeschlagen."
+      "already_configured": "This Vacuula-Server is already configured.",
+      "invalid_discovery_info": "The mDNS announcement does not contain a valid port.",
+      "cannot_connect": "Connection to Vacuula-Server failed."
     }
   }
 }
